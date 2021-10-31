@@ -1,20 +1,20 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const cors = require("cors");
+require("dotenv").config();
 
 //To select ID from MongoDB
 const ObjectId = require("mongodb").ObjectId;
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //Middleware
 app.use(cors());
 app.use(express.json());
 
 //MongoDB linking
-const uri =
-	"mongodb+srv://suny:Password6251420@tourx-agency.kufwr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}:@tourx-agency.kufwr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 
 async function run() {
