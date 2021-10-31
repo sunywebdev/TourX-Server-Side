@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 //MongoDB linking
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}:@tourx-agency.kufwr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@tourx-agency.kufwr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 
 async function run() {
