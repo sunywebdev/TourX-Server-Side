@@ -28,6 +28,7 @@ async function run() {
 		const commentsCollection = database.collection("comments");
 		const knowledgeCollection = database.collection("knowledge");
 		const pendingCollection = database.collection("pending_Order");
+		const slideCollection = database.collection("slides");
 
 		/* -------- post new packages , news , comments , knowledge ------------- */
 
@@ -69,6 +70,14 @@ async function run() {
 			console.log("Request for order ", newPending);
 			const result = await pendingCollection.insertOne(newPending);
 			console.log("Successfully Added New pending order ", result);
+			res.json(result);
+		});
+		//To post new Slide
+		app.post("/slides", async (req, res) => {
+			const newSlide = req.body;
+			console.log("Request for slide ", newSlide);
+			const result = await slideCollection.insertOne(newSlide);
+			console.log("Successfully Added New slide ", result);
 			res.json(result);
 		});
 
@@ -118,6 +127,15 @@ async function run() {
 			const pending = await get.toArray();
 			res.send(pending);
 			console.log("Successfully Found knowledge", pending);
+		});
+		//To show all slides on client site
+		app.get("/slides", async (req, res) => {
+			console.log(req.query);
+			const get = slideCollection.find({});
+			console.log("Request to find slides");
+			const slides = await get.toArray();
+			res.send(slides);
+			console.log("Successfully Found knowledge", slides);
 		});
 
 		/* -------- show single packages , news , comments , knowledge ------------- */
